@@ -49,7 +49,7 @@ void timeFuncVsChannel(RequestChannel& chan){
   clock_t channel_time = (clock() - start);
   clock_t total_time = channel_time + function_time;
   std::cout << endl << "---TIME---" << endl;
-  std::cout << "Function Time: " << function_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+  std::cout << "Function Time: " << function_time / (CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
   std::cout << "Channel Time: " << channel_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
   std::cout << "Totatl Time: " << total_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
 }
@@ -59,9 +59,8 @@ void timeFuncVsChannel(RequestChannel& chan){
 /*--------------------------------------------------------------------------*/
 
 void startClient(){
-
   cout << "CLIENT STARTED:" << endl;
-
+  string request_string = "hello";
   cout << "Establishing control channel... " << flush;
   RequestChannel chan("control", RequestChannel::CLIENT_SIDE);
   cout << "done." << endl;
