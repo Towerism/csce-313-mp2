@@ -30,7 +30,7 @@
 
 #include <errno.h>
 
-#include "reqchannel.H"
+#include "reqchannel.h"
 
 using namespace std;
 

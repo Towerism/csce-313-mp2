@@ -31,7 +31,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "reqchannel.H"
+#include "reqchannel.h"
 
 using namespace std;
 
