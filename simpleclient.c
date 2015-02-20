@@ -19,7 +19,7 @@
 /* INCLUDES */
 /*--------------------------------------------------------------------------*/
 
-/* #include <ctime> */
+#include <ctime>
 #include <cassert>
 #include <string>
 #include <iostream>
@@ -62,6 +62,26 @@ string int2string(int number) {
    return ss.str();//return a string with the contents of the stream
 }
 
+string echo(string message){
+    return message;
+}
+void timeFuncVsChannel(RequestChannel& chan){
+  std::clock_t    start;
+  string request_string = "hello";
+  start = std::clock();
+  echo(request_string);
+  clock_t function_time = (clock() - start);
+
+  start = std::clock();
+  string reply1 = chan.send_request("hello");
+  clock_t channel_time = (clock() - start);
+  clock_t total_time = channel_time + function_time;
+  std::cout << endl << "---TIME---" << endl;
+  std::cout << "Function Time: " << function_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+  std::cout << "Channel Time: " << channel_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+  std::cout << "Totatl Time: " << total_time / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
+}
+
 /*--------------------------------------------------------------------------*/
 /* MAIN FUNCTION */
 /*--------------------------------------------------------------------------*/
@@ -75,12 +95,7 @@ int main(int argc, char * argv[]) {
   cout << "done." << endl;
 
   /* -- Start sending a sequence of requests */
-
-  /* std::clock_t    start; */
-
-  /* start = std::clock(); string reply1 = chan.send_request("hello"); */
-  /* std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl; */
-
+  string reply1 = chan.send_request("hello");
   cout << "Reply to request 'hello' is '" << reply1 << "'" << endl;
 
   string reply2 = chan.send_request("data Joe Smith");
@@ -94,6 +109,7 @@ int main(int argc, char * argv[]) {
     string reply_string = chan.send_request(request_string);
     cout << "reply to request " << i << ":" << reply_string << endl;;
   }
+  timeFuncVsChannel(chan);
 
   string reply4 = chan.send_request("quit");
   cout << "Reply to request 'quit' is '" << reply4 << endl;

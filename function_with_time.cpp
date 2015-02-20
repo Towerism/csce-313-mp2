@@ -4,7 +4,6 @@
 /* *@date     Thu 19 Feb 21:39:43 2015                       * */
 /* *********************************************************** */
 #include <iostream>
-#include <ctime>
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -34,6 +33,7 @@ int main() {
   //time
   clock_t start;
 
+#include <ctime>
   start = std::clock();
   requestForData("1");
   std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl;
