@@ -1,6 +1,8 @@
 # makefile
+all: dataserver simpleclient client
 
-all: dataserver simpleclient
+client: client.c
+	g++ -o client client.c
 
 reqchannel.o: reqchannel.H reqchannel.C
 	g++ -c -g reqchannel.C

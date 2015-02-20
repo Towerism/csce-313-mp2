@@ -1,4 +1,4 @@
-/* 
+/*
     File: simpleclient.C
 
     Author: R. Bettati
@@ -19,6 +19,7 @@
 /* INCLUDES */
 /*--------------------------------------------------------------------------*/
 
+/* #include <ctime> */
 #include <cassert>
 #include <string>
 #include <iostream>
@@ -34,7 +35,7 @@
 using namespace std;
 
 /*--------------------------------------------------------------------------*/
-/* DATA STRUCTURES */ 
+/* DATA STRUCTURES */
 /*--------------------------------------------------------------------------*/
 
     /* -- (none) -- */
@@ -75,7 +76,11 @@ int main(int argc, char * argv[]) {
 
   /* -- Start sending a sequence of requests */
 
-  string reply1 = chan.send_request("hello");
+  /* std::clock_t    start; */
+
+  /* start = std::clock(); string reply1 = chan.send_request("hello"); */
+  /* std::cout << "Time: " << (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000) << " ms" << std::endl; */
+
   cout << "Reply to request 'hello' is '" << reply1 << "'" << endl;
 
   string reply2 = chan.send_request("data Joe Smith");
@@ -87,9 +92,9 @@ int main(int argc, char * argv[]) {
   for(int i = 0; i < 100; i++) {
     string request_string("data TestPerson" + int2string(i));
     string reply_string = chan.send_request(request_string);
-	cout << "reply to request " << i << ":" << reply_string << endl;;
+    cout << "reply to request " << i << ":" << reply_string << endl;;
   }
- 
+
   string reply4 = chan.send_request("quit");
   cout << "Reply to request 'quit' is '" << reply4 << endl;
 
